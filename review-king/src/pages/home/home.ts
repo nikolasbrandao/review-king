@@ -33,4 +33,15 @@ export class HomePage {
     modal.present();
   }
 
+  deleteReview(review){
+    
+    let index = this.reviews.indexOf(review);
+
+    if(index > -1){
+      this.reviews.splice(index,1);
+    }
+
+    this.reviewService.deleteReview(review._id);
+  }
+
 }
