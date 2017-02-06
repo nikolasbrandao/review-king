@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { ViewController } from 'ionic-angular';
 
 /*
   Generated class for the AddReviewPage page.
@@ -13,7 +13,25 @@ import { NavController, NavParams } from 'ionic-angular';
 })
 export class AddReviewPagePage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+  title: any;
+  description: any;
+  rating: any;
+
+  constructor(public viewCtrl: ViewController) {}
+
+  save():void{
+    let review = {
+      title : this.title,
+      description: this.description,
+      rating: this.rating
+    }
+
+    this.viewCtrl.dismiss(review);
+  }
+
+  close():void{
+    this.viewCtrl.dismiss();
+  }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad AddReviewPagePage');
