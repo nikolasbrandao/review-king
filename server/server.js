@@ -18,3 +18,19 @@ app.use( bodyParse.json() ); //pase application/json
 app.use( bodyParse.json({ type: 'application/vnd.api+json' }) );
 app.use( methodOverride() );
 app.use( cors() );
+
+app.use( function(req, res, next){
+    res.header('Acess-Control-Allow-Origin','*');
+    res.header('Acess-Control-Allow-Methods','DELETE,PUT');
+    res.header('Acess-Control-Allow-Header', 'Origin, X-Requested-With, Content-Type, Accept');
+} );
+
+// Models
+
+var Review = mongoose.model('Review', {
+    title: String,
+    description: String,
+    rating: Number
+});
+
+// Routes
