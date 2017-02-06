@@ -34,3 +34,17 @@ var Review = mongoose.model('Review', {
 });
 
 // Routes
+
+    // get reviews
+    app.get('/api/reviews', function(req, res){
+        console.log('fetching reviews');
+
+        // use moongose to get all reviews in the database
+        Review.find(function(err, reviews){
+            if(err){
+                res.send(err);
+            }
+
+            res.json(reviews);
+        });
+    });
