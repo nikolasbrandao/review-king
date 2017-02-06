@@ -48,3 +48,42 @@ var Review = mongoose.model('Review', {
             res.json(reviews);
         });
     });
+
+    // create review and send back all reviews after creation 
+    app.post('/api/reviews', function(req, res){
+        console.log('creating review');
+
+        //create review
+        Review.create({
+            title: req.body.title,
+            description: req.body.description,
+            rating: req.body.rating,
+            done : false
+        }, function(err, review){
+            if(err){
+                res.send(err);
+            }
+
+            // get and return all the reviews after you create another
+            Review.find(function(err, reviews){
+                if(err){
+                    res.send(err);
+                }
+
+                res.json(reviews);
+            });
+
+        });
+
+    });
+
+    //delete review
+    app.delete('/api/reviews/:review_id', function(req, res){
+        Review.remove({
+            _id: req.params.review_id
+        }, function(err, reviews){
+            if(err){
+                res.send(err);
+            }
+        });
+    });
